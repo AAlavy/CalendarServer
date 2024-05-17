@@ -33,12 +33,11 @@ def getEvents():
 
 @app.route("/event", methods=["POST"])
 async def newEvent():
-  data = request.get_json()
+  data = request.get_json(force=True)['eventInvite']
   creds = None
   # The file token.json stores the user's access and refresh tokens, and is
   # created automatically when the authorization flow completes for the first
   # time.
-  print("Were in")
   if os.path.exists("token.json"):
     creds = Credentials.from_authorized_user_file("token.json", [os.getenv("SCOPE_URI")])
   # If there are no (valid) credentials available, let the user log in.
